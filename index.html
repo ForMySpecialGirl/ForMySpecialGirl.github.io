@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perasaan Cinta</title>
+    <style>
+        body {
+            background-color: #ffccff;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        h1 {
+            color: #ff66b2;
+            font-size: 3em;
+        }
+
+        p {
+            color: #ff3399;
+            font-size: 1.5em;
+        }
+
+        .romantic-message {
+            display: none; /* Sembunyikan pesan romantis awalnya */
+            color: #ff3399;
+            font-size: 2em;
+            margin-top: 20px;
+        }
+
+        .foto-container {
+            display: flex; /* Menggunakan flexbox untuk berjajar ke samping */
+            justify-content: center; /* Mengatur agar foto berada di tengah */
+            margin-top: 20px;
+        }
+
+        .foto-kita {
+            width: 300px;
+            border-radius: 15px;
+            margin: 0 10px; /* Memberikan jarak antar foto */
+            display: none; /* Sembunyikan foto awalnya */
+        }
+
+        button {
+            background-color: #ff66b2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #ff3399;
+        }
+
+        .expression-message {
+            display: none; /* Sembunyikan pesan pernyataan awalnya */
+            color: #ff3399;
+            font-size: 1.5em;
+            margin-top: 20px;
+        }
+
+        #thankYouMessage {
+            display: none; /* Sembunyikan pesan terima kasih */
+            color: #ff3399;
+            font-size: 1.5em;
+            margin-top: 20px;
+        }
+
+        .response-buttons {
+            display: none; /* Sembunyikan tombol respons awalnya */
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="welcomeMessage">Selamat Datang!</h1>
+        <p id="instruction">Klik tombol di bawah ini.</p>
+        <button id="startButton">FOR YOU</button>
+        
+        <audio id="backgroundMusic" loop>
+            <source src="lagu.mp3" type="audio/mpeg">
+            Browser Anda tidak mendukung audio.
+        </audio>
+
+        <div class="romantic-message" id="romanticMessage">
+            <h1>Halo Niha Nurmala</h1>
+            <p>Aku menyebutnya ini first date!</p>
+        </div>
+
+        <div class="foto-container">
+            <img src="photos1.jpg" alt="Foto Kita 1" class="foto-kita" id="foto1">
+            <img src="photos2.jpg" alt="Foto Kita 2" class="foto-kita" id="foto2">
+            <img src="photos3.jpg" alt="Foto Kita 3" class="foto-kita" id="foto3">
+        </div>
+
+        <button id="expressButton" style="display: none;">Ungkapkan Perasaan</button>
+        <div class="expression-message" id="expressionMessage">
+            <p>sebelumnya maaf sedikit alay.</p>
+            <p>aku cuman mau bilang aku sayang kamu everytime...</p>
+            <p>kurang lebih sebulan aku kenal sama kamu, mulai dari sikap, bahkan hal-hal kecil tentang kamu!</p>
+            <p>dan aku harap kita bisa lebih dari sekedar adik tingkat dan kaka tingkat</p>
+            <p>Aku mau milikin kamu seutuhnya, will you be mine?</p>
+        </div>
+
+        <div class="response-buttons" id="responseButtons">
+            <button id="yesButton">Yes</button> <button id="noButton">No</button>
+        </div>
+
+        <div id="thankYouMessage">
+            <p>Terima kasih</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("startButton").onclick = function() {
+            // Sembunyikan pesan selamat datang dan tombol
+            document.getElementById("welcomeMessage").style.display = "none";
+            document.getElementById("instruction").style.display = "none";
+            document.getElementById("startButton").style.display = "none";
+
+            // Tampilkan pesan romantis
+            document.getElementById("romanticMessage").style.display = "block";
+
+            // Tampilkan foto
+            document.getElementById("foto1").style.display = "block";
+            document.getElementById("foto2").style.display = "block";
+            document.getElementById("foto3").style.display = "block";
+
+            // Tampilkan tombol ungkapkan perasaan
+            document.getElementById("expressButton").style.display = "block";
+
+            // Putar musik
+            var music = document.getElementById("backgroundMusic");
+            music.play();
+        };
+
+        document.getElementById("expressButton").onclick = function() {
+            // Tampilkan pesan ungkapan perasaan
+            document.getElementById("expressionMessage").style.display = "block";
+            
+            // Sembunyikan tombol ungkapkan perasaan setelah diklik
+            document.getElementById("expressButton").style.display = "none";
+            
+            // Tampilkan tombol respons
+            document.getElementById("responseButtons").style.display = "block";
+        };
+
+        document.getElementById("yesButton").onclick = function() {
+            // Tampilkan pesan terima kasih
+            document.getElementById("thankYouMessage").style.display = "block";
+            document.getElementById("responseButtons").style.display = "none"; // Sembunyikan tombol respons
+        };
+
+        document.getElementById("noButton").onclick = function() {
+            // Pindahkan tombol "No" ke posisi acak
+            var container = document.querySelector('.container');
+            var noButton = document.getElementById("noButton");
+            var randomX = Math.random() * (container.clientWidth - noButton.clientWidth);
+            var randomY = Math.random() * (container.clientHeight - noButton.clientHeight - 100); // Menghindari keluar dari tampilan
+            noButton.style.position = "absolute";
+            noButton.style.left = randomX + "px";
+            noButton.style.top = randomY + "px";
+        };
+    </script>
+</body>
+</html>
